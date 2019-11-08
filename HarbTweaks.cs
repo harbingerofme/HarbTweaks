@@ -8,10 +8,10 @@ namespace HarbTweaks
 {
     
 
-    [PluginDependency("community.mmbait", PluginDependency.DependencyFlags.SoftDependency)]
-    [PluginDependency("community.mmhook", PluginDependency.DependencyFlags.SoftDependency)]
-    [PluginDependency("com.bepis.r2api", PluginDependency.DependencyFlags.SoftDependency)]
-    [PluginMetadata(GUID, modname, version)]
+    [BepInDependency("community.mmbait", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("community.mmhook", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.bepis.r2api", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInPlugin(GUID, modname, version)]
     public class HarbTweaks : BaseUnityPlugin
     {
         public const string GUID = "com.harbingerofme.harbtweaks";
