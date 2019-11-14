@@ -1,8 +1,6 @@
-﻿using System;
-using BepInEx.Configuration;
-using MonoMod.RuntimeDetour;
-using R2API.Utils;
+﻿using BepInEx.Configuration;
 using UnityEngine;
+using RoR2;
 
 namespace HarbTweaks
 {
@@ -25,7 +23,8 @@ namespace HarbTweaks
 
         private void SceneDirector_onPostPopulateSceneServer(RoR2.SceneDirector obj)
         {
-            UnityEngine.Object.Destroy(GameObject.Find("AltarSkeletonBody").GetComponent<AkEvent>());
+            if(obj.gameObject.scene.name == "foggyswamp")
+                UnityEngine.Object.Destroy(GameObject.Find("AltarSkeletonBody").GetComponent<AkEvent>());
         }
 
         protected override void MakeConfig()
