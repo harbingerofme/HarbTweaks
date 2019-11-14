@@ -4,7 +4,7 @@
 
 **No interference guarantee**: if a tweak is disabled, it will not be doing anything that can break. If a tweak causes interference with another mod, disabling the tweak will ensure the other mod will run normally. If you are using the configuration manager, this means that these tweaks can be disabled/enabled/configured on the fly and have immediate effects.
 
-Recommend that you use [Configuration Manager](https://github.com/BepInEx/BepInEx.ConfigurationManager) *[(download page)](https://github.com/BepInEx/BepInEx.ConfigurationManager/releases)* to modify these values in game.
+Recommend that you use [Configuration Manager](https://thunderstore.io/package/JackPendarvesRead/BepinexConfigurationManager/) to modify these values in game.
 
 **Installation:** Drop into your `Bepinex/plugins/` folder.
 

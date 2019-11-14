@@ -1,0 +1,10 @@
+﻿{
+  "name": "HarbTweaks",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/harbingerofme/HarbTweaks",
+  "description": "Encompassing mod for all my tweaks.",
+  "dependencies": [
+	"tristanmcpherson-R2API-2.2.54",
+    "bbepis-BepInExPack-3.0.0"
+  ]
+}
