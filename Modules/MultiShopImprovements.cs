@@ -3,7 +3,7 @@ using UnityEngine;
 using R2API.Utils;
 using RoR2;
 using BepInEx.Configuration;
-
+using System.Collections.Generic;
 
 namespace HarbTweaks
 {
@@ -12,7 +12,7 @@ namespace HarbTweaks
     {
         private const string TweakName = "Multishop Improvements";
         private const bool DefaultEnabled = true;
-        private const string Description = "This tweak aims to always leave a choice when interacting with a multishop.";
+        private const string Description = "This tweak aims to always leave more choice when interacting with a multishop.";
 
         private ConfigEntry<int> maxQuestions;
         private ConfigEntry<int> maxSame;
@@ -22,7 +22,7 @@ namespace HarbTweaks
 
         protected override void MakeConfig()
         {
-            maxQuestions = AddConfig("Max amount of question marks.", 2, new ConfigDescription("Amount of question marks that can appear at once on a multishop. Vanilla is 3.",new AcceptableValueRange<int>(0,3)));
+            maxQuestions = AddConfig("Max amount of question marks.", 1, new ConfigDescription("Amount of question marks that can appear at once on a multishop. Vanilla is 2.",new AcceptableValueRange<int>(0,2)));
             maxSame = AddConfig("Max amount of duplicates.", 1, new ConfigDescription("Max amount of duplicates in a shop. Vanilla is 2.", new AcceptableValueRange<int>(0, 2)));
         }
 
@@ -39,26 +39,63 @@ namespace HarbTweaks
         private void MultiShopController_on_CreateTerminals1(On.RoR2.MultiShopController.orig_CreateTerminals orig, RoR2.MultiShopController self)
         {
             orig(self);
+
             int questionCount = 0;
             int sameCount = 0;
-            PickupIndex[] pickups = new PickupIndex[3];
+            List<PickupIndex> pickups = new List<PickupIndex>();
+
+            Xoroshiro128Plus rng = self.GetFieldValue<Xoroshiro128Plus>("rng");
             GameObject[] terminals = self.GetFieldValue<GameObject[]>("terminalGameObjects");
             ShopTerminalBehavior[] behaviors = new ShopTerminalBehavior[3];
             for (int i=0;i<3;i++)
             {
                 GameObject terminal = terminals[i];
-                var stb = terminal.GetComponent<ShopTerminalBehavior>();
+                ShopTerminalBehavior stb = terminal.GetComponent<ShopTerminalBehavior>();
+                
                 behaviors[i] = stb;
                 if (stb)
                 {
-                    if (stb.pickupIndexIsHidden)
+                    bool shopDirty = false;
+                    bool hidden = stb.pickupIndexIsHidden;
+                    if (hidden)
+                    {
                         questionCount++;
-                    pickups[i] = stb.CurrentPickupIndex();
-                    if (i > 0)
-                        if (pickups[i - 1] == pickups[i])
-                            sameCount++;
-                        else if(i>1 && pickups[0] == pickups[i])
-                            sameCount++;
+                        if (questionCount > maxQuestions.Value)
+                        {
+                            hidden = false;
+                            shopDirty |= true;
+                        }
+                    }
+                    PickupIndex pickupIndex = stb.CurrentPickupIndex();
+                    if (pickups.Contains(pickupIndex))
+                    {
+                        sameCount++;
+                        if (sameCount > maxSame.Value)
+                        {
+                            shopDirty |= true;
+                            switch (self.itemTier)
+                            {
+                                case ItemTier.Tier1:
+                                    pickupIndex = rng.NextElementUniform(Run.instance.availableTier1DropList);
+                                    break;
+                                case ItemTier.Tier2:
+                                    pickupIndex = rng.NextElementUniform(Run.instance.availableTier2DropList);
+                                    break;
+                                case ItemTier.Tier3:
+                                    pickupIndex = rng.NextElementUniform(Run.instance.availableTier3DropList);
+                                    break;
+                                case ItemTier.Lunar:
+                                    pickupIndex = rng.NextElementUniform(Run.instance.availableLunarDropList);
+                                    break;
+                            }
+                        }
+                    }
+                    pickups.Add(pickupIndex);
+
+                    if(shopDirty)
+                    {
+                        stb.SetPickupIndex(pickupIndex, hidden);
+                    }
                 }
                 else
                 {
@@ -71,18 +108,9 @@ namespace HarbTweaks
                 questionCount--;
                 behaviors[questionCount].SetPickupIndex(pickups[questionCount], false);
             }
-            while (sameCount>maxSame.Value)
+            if (sameCount > maxSame.Value)
             {
-                var term = behaviors[sameCount];
-                term.selfGeneratePickup = true;
-                term.Start();
-                if (sameCount >= 1 && term.CurrentPickupIndex() != behaviors[0].CurrentPickupIndex() )
-                {
-                    if(sameCount != 2 || term.CurrentPickupIndex() != behaviors[1].CurrentPickupIndex())
-                    {
-                        sameCount--;
-                    }
-                }
+
             }
         }
     }
