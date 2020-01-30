@@ -14,8 +14,8 @@ Recommend that you use [Configuration Manager](https://thunderstore.io/package/J
 
 * **Bigger Lockboxes** makes the rusted lockbox spawned from rusted keys  increase in size as you acquire more keys. It can be configured to just all scale up all boxes in the first place and not scale with keys. **Multiplayer:** entirely clientside.
 * **First Stage Spawns** aims to improves the pace of the game's start. Enemies appear prespawned on the first stage, at twice the density of a normal prespawn. Can be configured for different densities. **Multiplayer:** entirely hostside
-* **No More Triple Question** prevents multishop terminals roll a question mark three times, and also prevents them from rolling three times the same item. Can be configured to disallow question marks and duplicates completely. **Multiplayer:** Let me know.
-* **Silent Altar** Disables that stupid windnoise that you can hear from everywhere on the Wetland Aspect. God I hate that noise.
+* **MultiShopImprovements** prevents multishop terminals roll a question mark more than once, and also prevents them from rolling three times the same item. Can be configured to disallow question marks and duplicates completely. **Multiplayer:** Hostside.
+* **Silent Altar** Disables that stupid windnoise that you can hear from everywhere on the Wetland Aspect. God I hate that noise. I really do.
 
 ---
 
