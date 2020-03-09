@@ -26,6 +26,7 @@ These are niche features asked for by a small subset of people.
 * **Greedy Lockboxes** prevents players from opening rusted lockboxes if they don't have a key. **Multiplayer:** Hostside, unknown for only client.
 * **No Forward Saw** sets the force applied on the player when using MUL-T's Power Saw to `0`. Can be configured. **Multiplayer:** Let me know.
 * **Shorter Medkits** makes the time you have to wait for a medkit to apply to `0.9` seconds. Can be configured. **Multiplayer:** Hostside.
+* **Commando Grenades are Impact** makes commando's grenades explode on impact. By [SushiDev](https://thunderstore.io/package/SushiDev/) **Multiplayer:** Let me know.
 
 ---
 
