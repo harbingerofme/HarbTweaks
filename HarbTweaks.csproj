@@ -18,9 +18,6 @@
     <Reference Include="Assembly-CSharp.R2API.mm">
       <HintPath>..\libs\Assembly-CSharp.R2API.mm.dll</HintPath>
     </Reference>
-    <Reference Include="AssetPlus">
-      <HintPath>..\libs\AssetPlus.dll</HintPath>
-    </Reference>
     <Reference Include="BepInEx">
       <HintPath>..\libs\BepInEx.dll</HintPath>
     </Reference>
