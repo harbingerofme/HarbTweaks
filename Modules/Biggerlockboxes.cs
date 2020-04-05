@@ -79,7 +79,6 @@ namespace HarbTweaks
             {
                 keys += master.inventory.GetItemCount(ItemIndex.TreasureCache);
             }
-            LogInfo("stage_ctor");
             ApplyTransform(GetScaleAmount(keys,FirstConfig.Value));
         }
 
@@ -114,7 +113,8 @@ namespace HarbTweaks
             LogInfo($"Apply transform: {vanillaScale}->{lockboxPrefab.transform.localScale}");
         }
 
-        public void SceneDirector_PopulateScene(ILContext il)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Reference")]
+        private void SceneDirector_PopulateScene(ILContext il)
         {
             var c = new ILCursor(il);
             int lockbox = 0;
