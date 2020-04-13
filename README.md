@@ -15,6 +15,7 @@ Recommend that you use [Configuration Manager](https://thunderstore.io/package/J
 * **Bigger Lockboxes** makes the rusted lockbox spawned from rusted keys  increase in size as you acquire more keys. It can be configured to just all scale up all boxes in the first place and not scale with keys. **Multiplayer:** entirely clientside.
 * **MultiShopImprovements** prevents multishop terminals roll a question mark more than once, and also prevents them from rolling three times the same item. Can be configured to disallow question marks and duplicates completely. **Multiplayer:** Hostside.
 * **Silent Altar** Disables that stupid windnoise that you can hear from everywhere on the Wetland Aspect. God I hate that noise. I really do.
+* **Grandparent Effect Disable** Are you tired of seeing the pointless error about a boss that isn't even in the game? This fixed the problem by attaching the thing it request for to it. By [SushiDev](https://thunderstore.io/package/SushiDev/) 
 
 ---
 
